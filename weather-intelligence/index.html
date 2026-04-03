@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Intelligence System</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🌦 Weather Intelligence System</h1>
+
+    <input type="text" id="city" placeholder="Enter City Name">
+    <button onclick="getWeather()">Get Weather</button>
+    <button onclick="getLocationWeather()">📍 Use My Location</button>
+
+    <div class="weather-box">
+      <h2 id="location"></h2>
+      <p id="temp"></p>
+      <p id="humidity"></p>
+      <p id="rain"></p>
+    </div>
+
+    <div class="advice-box">
+      <h2>🌱 Smart Farming Advice</h2>
+      <p id="advice"></p>
+    </div>
+
+    <!-- Map -->
+    <iframe id="map" width="100%" height="250" style="border:0;"></iframe>
+
+    <!-- Graph -->
+    <canvas id="weatherChart"></canvas>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
