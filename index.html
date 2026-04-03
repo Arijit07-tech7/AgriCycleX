@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌾 Smart Farmer Market</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🌾 Smart Farmer Market</h1>
+    <p>Sell your crops, vegetables, fruits, or any other product easily!</p>
+  </header>
+
+  <section class="form-section">
+    <h2>Sell Your Product</h2>
+    <form id="sellForm">
+      <div class="input-group">
+        <input type="text" id="farmerName" placeholder="Farmer Name" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email (optional)">
+      </div>
+      <div class="input-group">
+        <input type="number" id="phone" placeholder="Phone Number" required>
+      </div>
+      <div class="input-group">
+        <select id="state" required>
+          <option value="">--Choose State / UT--</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <select id="city" required>
+          <option value="">--Choose District / City--</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <select id="product" required>
+          <option value="">--Choose Product (Crop/Fruit/Vegetable)--</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <input type="number" id="quantity" placeholder="Quantity (kg/unit)" required>
+      </div>
+      <div class="input-group">
+        <button type="submit" class="btn-submit">Sell & Check Value</button>
+      </div>
+    </form>
+    <p class="helpline">📞 Helpline Number: 7980395573</p>
+  </section>
+
+  <section class="result-section">
+    <h2>Market Value</h2>
+    <p id="result">Enter your details to see the market value</p>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
