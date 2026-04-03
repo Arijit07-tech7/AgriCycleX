@@ -1,120 +1,82 @@
-// 🔑 PUT YOUR API KEY HERE
+// 🔑 ADD YOUR API KEY HERE
 const apiKey = "b9af44ab6cc28481131e1985e66731c9";
 
-// 🌦 Get Weather by City
 async function getWeather() {
+  const state = document.getElementById("state").value;
+  const district = document.getElementById("district").value;
   const city = document.getElementById("city").value;
 
-  if (city === "") {
-    alert("Please enter a city name!");
+  if (state === "" || district === "") {
+    alert("Please select state and district!");
     return;
   }
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  const location = city !== "" ? city : district;
 
-  fetchWeather(url);
-}
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location},IN&appid=${apiKey}&units=metric`;
 
-// 🌍 Get Weather by Location
-function getLocationWeather() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-
-      fetchWeather(url);
-    });
-  } else {
-    alert("Geolocation not supported!");
-  }
-}
-
-// 🌦 Main Fetch Function
-async function fetchWeather(url) {
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
-      alert("City not found!");
+      alert("Location not found! Try a nearby city.");
       return;
     }
 
     const data = await response.json();
 
-    // 🌡 Extract Weather Data
     const temp = data.main.temp;
     const humidity = data.main.humidity;
-    const windSpeed = data.wind.speed;
-    const condition = data.weather[0].main.toLowerCase();
+    const wind = data.wind.speed;
 
     let rain = "No";
     if (data.rain) rain = "Yes";
 
-    // 📊 Display Weather
-    document.getElementById("location").innerText = "📍 " + data.name;
-    document.getElementById("temp").innerText = "🌡 Temperature: " + temp + "°C";
-    document.getElementById("humidity").innerText = "💧 Humidity: " + humidity + "%";
-    document.getElementById("rain").innerText = "🌧 Rain: " + rain;
+    // Display Weather
+    document.getElementById("location").innerText =
+      `📍 ${district}, ${state}`;
 
-    // 🌱 ADVANCED FARMING ADVICE SYSTEM
+    document.getElementById("temp").innerText =
+      "🌡 Temperature: " + temp + "°C";
+
+    document.getElementById("humidity").innerText =
+      "💧 Humidity: " + humidity + "%";
+
+    document.getElementById("rain").innerText =
+      "🌧 Rain: " + rain;
+
+    document.getElementById("wind").innerText =
+      "🌬 Wind: " + wind + " m/s";
+
+    // 🌱 Advanced Farming Advice
     let advice = "";
 
-    // 🌧 Rain Advice
     if (rain === "Yes") {
-      advice += "🌧 Rain expected → Avoid irrigation. Ensure proper drainage to prevent waterlogging. ";
+      advice += "🌧 Avoid irrigation. Ensure drainage. ";
     } else {
-      advice += "☀ No rain → Irrigate crops if soil is dry. ";
+      advice += "☀ Irrigate crops if soil is dry. ";
     }
 
-    // 🌡 Temperature Advice
     if (temp > 35) {
-      advice += "🔥 Extreme heat → Increase irrigation, use mulching, avoid afternoon watering. ";
+      advice += "🔥 High heat: Increase watering and use mulching. ";
     } else if (temp > 25) {
-      advice += "🌤 Warm weather → Good growth conditions, maintain moderate watering. ";
-    } else if (temp >= 15) {
-      advice += "🌿 Mild weather → Ideal for most crops. Continue normal practices. ";
-    } else {
-      advice += "❄ Cold weather → Protect crops from frost using covers or greenhouse. ";
+      advice += "🌤 Good conditions for crop growth. ";
+    } else if (temp < 15) {
+      advice += "❄ Protect crops from cold. ";
     }
 
-    // 💧 Humidity Advice
-    if (humidity > 85) {
-      advice += "💧 Very high humidity → High fungal risk. Use fungicides & ensure airflow. ";
-    } else if (humidity > 60) {
-      advice += "🌫 Moderate humidity → Monitor pests & diseases. ";
-    } else {
-      advice += "🌵 Low humidity → Increase irrigation & retain soil moisture. ";
+    if (humidity > 80) {
+      advice += "💧 High humidity: Risk of fungal diseases. ";
     }
 
-    // 🌬 Wind Advice
-    if (windSpeed > 10) {
-      advice += "🌪 Strong winds → Use windbreaks & avoid spraying pesticides. ";
-    } else {
-      advice += "🍃 Light winds → Good for spraying fertilizers. ";
+    if (wind > 10) {
+      advice += "🌪 Strong winds: Avoid spraying pesticides. ";
     }
 
-    // ☁ Weather Condition Advice
-    if (condition.includes("cloud")) {
-      advice += "☁ Cloudy → Reduced sunlight may slow crop growth. ";
-    } else if (condition.includes("clear")) {
-      advice += "☀ Clear sky → Excellent for photosynthesis. ";
-    } else if (condition.includes("storm") || condition.includes("thunder")) {
-      advice += "⛈ Storm alert → Secure crops & delay farming operations. ";
+    if (advice === "") {
+      advice = "🌱 Normal farming conditions.";
     }
 
-    // 🌾 Crop Suggestions (Smart Logic)
-    if (temp > 25 && humidity > 70) {
-      advice += "🌾 Suitable for rice cultivation. ";
-    } else if (temp < 25 && humidity < 60) {
-      advice += "🌱 Suitable for wheat, pulses. ";
-    }
-
-    // 🚜 General Advice
-    advice += "🚜 Regularly check soil moisture & prefer organic fertilizers.";
-
-    // 📢 Display Advice
     document.getElementById("advice").innerText = advice;
 
   } catch (error) {

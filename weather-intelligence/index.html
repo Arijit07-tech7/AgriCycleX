@@ -2,40 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Weather Intelligence System</title>
+  <title>AgriCycleX - Weather Intelligence</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+  <!-- App Name -->
+  <div class="app-name">🌾 AgriCycleX</div>
 
   <div class="container">
     <h1>🌦 Weather Intelligence System</h1>
 
-    <input type="text" id="city" placeholder="Enter City Name">
-    <button onclick="getWeather()">Get Weather</button>
-    <button onclick="getLocationWeather()">📍 Use My Location</button>
+    <!-- Location Inputs -->
+    <div class="location-box">
+      <select id="state">
+        <option value="">Select State</option>
+        <option>West Bengal</option>
+        <option>Maharashtra</option>
+        <option>Uttar Pradesh</option>
+        <option>Bihar</option>
+        <option>Punjab</option>
+        <option>Rajasthan</option>
+        <option>Gujarat</option>
+        <option>Tamil Nadu</option>
+        <option>Karnataka</option>
+        <option>Kerala</option>
+        <option>Odisha</option>
+        <option>Assam</option>
+        <option>Jharkhand</option>
+      </select>
 
+      <input type="text" id="district" placeholder="Enter District">
+      <input type="text" id="city" placeholder="Enter Nearest City (Recommended)">
+    </div>
+
+    <button onclick="getWeather()">Get Weather</button>
+
+    <!-- Weather Output -->
     <div class="weather-box">
       <h2 id="location"></h2>
       <p id="temp"></p>
       <p id="humidity"></p>
       <p id="rain"></p>
+      <p id="wind"></p>
     </div>
 
+    <!-- Farming Advice -->
     <div class="advice-box">
       <h2>🌱 Smart Farming Advice</h2>
       <p id="advice"></p>
     </div>
 
-    <!-- Map -->
-    <iframe id="map" width="100%" height="250" style="border:0;"></iframe>
-
-    <!-- Graph -->
-    <canvas id="weatherChart"></canvas>
-
   </div>
+
+  <!-- Helpline -->
+  <div class="helpline">📞 Helpline: 8697273012</div>
 
   <script src="script.js"></script>
 </body>
